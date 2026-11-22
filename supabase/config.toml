@@ -449,3 +449,36 @@ entrypoint = "./functions/broadcast-task-deletion/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/broadcast-task-deletion/*.html" ]
+
+[functions.update-task-activity-logs]
+enabled = true
+verify_jwt = false
+import_map = "./functions/update-task-activity-logs/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/update-task-activity-logs/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/update-task-activity-logs/*.html" ]
+
+[functions.increment-log-notifications]
+enabled = true
+verify_jwt = false
+import_map = "./functions/increment-log-notifications/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/increment-log-notifications/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/increment-log-notifications/*.html" ]
+
+[functions.increment-comment-notifications]
+enabled = true
+verify_jwt = false
+import_map = "./functions/increment-comment-notifications/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/increment-comment-notifications/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/increment-comment-notifications/*.html" ]
