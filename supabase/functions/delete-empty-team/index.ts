@@ -36,7 +36,63 @@ export default {
                     });
                 }
 
-                // IMPORTANT TODO: Delete dependent entries safely.
+                const { data: projects_data, error: projects_error } = await supabase
+                    .from("projects")
+                    .select("*")
+                    .eq("team_id", team_id);
+                
+                if (projects_error) {
+                    throw projects_error;
+                }
+
+                const project_ids = projects_data.map(project => project.id);
+
+                const { data: tasks_data, error: tasks_error } = await supabase
+                    .from("tasks")
+                    .select("*")
+                    .in("project_id", project_ids);
+                
+                if (tasks_error) {
+                    throw tasks_error;
+                }
+
+                const task_ids = tasks_data.map(task => task.id);
+
+                const { error: comments_error } = await supabase
+                    .from("comments")
+                    .delete()
+                    .in("task_id", task_ids);
+                
+                if (comments_error) {
+                    throw comments_error;
+                }
+
+                const { error: assignments_error } = await supabase
+                    .from("assignments")
+                    .delete()
+                    .eq("team_id", team_id);
+                
+                if (assignments_error) {
+                    throw assignments_error;
+                }
+
+                const { error: task_delete_error } = await supabase
+                    .from("tasks")
+                    .delete()
+                    .in("id", task_ids);
+                
+                if (task_delete_error) {
+                    throw task_delete_error;
+                }
+
+                const { error: project_delete_error } = await supabase
+                    .from("projects")
+                    .delete()
+                    .eq("team_id", team_id);
+
+                if (project_delete_error) {
+                    throw project_delete_error;
+                }
 
                 const { error: team_error } = await supabase
                     .from("teams")
